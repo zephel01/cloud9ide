@@ -1,0 +1,12 @@
+ccxt
+simplejson
+pybitflyer
+requests
+datetime
+pandas
+pytz
+websocket-client==0.52.0
+matplotlib
+discord
+pillow
+bitmex
