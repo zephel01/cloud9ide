@@ -12,6 +12,9 @@ sudo yum -y install epel-release
 #nodejs
 sudo yum -y install nodejs npm --enablerepo=epel
 
+#install nginx
+sudo yum -y install nginx
+
 chsh -s /bin/bash
 
 # pyenv install
@@ -58,3 +61,6 @@ scripts/install-sdk.sh
 sudo npm install -g forever
 
 forever start server.js -p 8080 -a user:password -w /opt/workspace/
+
+sudo cp ~/cloud9ide/nginx-ssl.conf /etc/nginx/conf.d/
+
