@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 開発環境インストール
-sudo yum install -y openssl-devel bzip2-devel zlib-devel readline-devel sqlite-devel glibc-static
+sudo yum install -y openssl-devel bzip2-devel zlib-devel readline-devel sqlite-devel glibc-static libevent-devel ncurses-devel tmux
 sudo yum groupinstall -y development
 
 #amazonlinux2 epel
@@ -49,8 +49,8 @@ pip install certbot-dns-cloudflare
 
 sudo mkdir /opt/workspace
 sudo chmod 777 /opt/workspace
-sudo mkdir ~/.c9
-sudo chmod 777 ~/.c9
+mkdir ~/.c9
+chmod 777 ~/.c9
 cd /usr/local/src
 sudo chmod 777 /usr/local/src
 
@@ -61,7 +61,11 @@ scripts/install-sdk.sh
 sudo npm install -g forever initd-forever
 sudo npm install -g log
 
-forever start server.js -p 8080 -a user:password -w /opt/workspace/
+sudo chkconfig cloud9ide --add
+sudo chkconfig cloud9ide on
+sudo cp ~/cloud9ide/cloud9ide /etc/init.d/
+
+sudo /etc/init.d/cloud9ide start
 
 sudo cp ~/cloud9ide/nginx-ssl.conf /etc/nginx/conf.d/
 
