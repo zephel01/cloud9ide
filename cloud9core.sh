@@ -58,7 +58,8 @@ git clone git://github.com/c9/core.git c9sdk
 cd c9sdk
 scripts/install-sdk.sh
 
-sudo npm install -g forever
+sudo npm install -g forever initd-forever
+sudo npm install -g log
 
 forever start server.js -p 8080 -a user:password -w /opt/workspace/
 
