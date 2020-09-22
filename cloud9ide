@@ -47,7 +47,7 @@ start() {
 	export NODE_ENV=production
    port=8080
    pass="user:password"
-   workspace=/home/ec2/workspace/
+   workspace=/home/ec2-user/workspace/
    $foreverApp start --pidFile $pidFile -l $logFile -a -d -c "$command" $nodeApp -p $port -a $pass -w $workspace
    RETVAL=$?
 }

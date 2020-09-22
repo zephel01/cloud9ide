@@ -9,8 +9,12 @@ sudo amazon-linux-extras install -y epel
 #centos epel
 sudo yum -y install epel-release
 
-#nodejs
-sudo yum -y install nodejs npm --enablerepo=epel
+#nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+source ~/.bashrc
+nvm install stable
+node --version
 
 #install nginx
 sudo yum -y install nginx
@@ -47,8 +51,8 @@ pyenv rehash
 pip install --upgrade pip
 pip install certbot-dns-cloudflare
 
-sudo mkdir /opt/workspace
-sudo chmod 777 /opt/workspace
+mkdir /home/ec2-user/workspace
+chmod 777 /home/ec2-user/workspace
 mkdir ~/.c9
 chmod 777 ~/.c9
 cd /usr/local/src
@@ -61,9 +65,9 @@ scripts/install-sdk.sh
 sudo npm install -g forever initd-forever
 sudo npm install -g log
 
+sudo cp ~/cloud9ide/cloud9ide /etc/init.d/
 sudo chkconfig cloud9ide --add
 sudo chkconfig cloud9ide on
-sudo cp ~/cloud9ide/cloud9ide /etc/init.d/
 
 sudo /etc/init.d/cloud9ide start
 
