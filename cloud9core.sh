@@ -9,12 +9,10 @@ sudo amazon-linux-extras install -y epel
 #centos epel
 sudo yum -y install epel-release
 
-#nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+#node
+curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
 
-source ~/.bashrc
-nvm install stable
-node --version
+sudo yum -y install nodejs
 
 #install nginx
 sudo yum -y install nginx
