@@ -9,17 +9,20 @@ sudo amazon-linux-extras install -y epel
 #centos epel
 sudo yum -y install epel-release
 
-#node
-curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+#nodebrew
+curl -L git.io/nodebrew | perl - setup
+echo "export PATH=$HOME/.nodebrew/current/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
 
-sudo yum -y install nodejs
+nodebrew install-binary latest
+nodebrew use latest
 
 #install nginx
 sudo yum -y install nginx
 
 chsh -s /bin/bash
 
-# pyenv install
+#pyenv install
 
 git clone git://github.com/yyuu/pyenv.git ~/.pyenv
 git clone git://github.com/yyuu/pyenv-update.git ~/.pyenv/plugins/pyenv-update
