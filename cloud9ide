@@ -29,6 +29,7 @@ if [ -e /lib/lsb/init-functions ]; then
 	. /lib/lsb/init-functions
 fi;
 
+source /home/ec2-user/.bashrc
 pidFile="/var/run/cloud9ide.pid"
 logFile="/var/run/cloud9ide.log"
 
@@ -36,18 +37,19 @@ command="node"
 nodeApp="/usr/local/src/c9sdk/server.js"
 foreverApp="forever"
 
+port=8080
+pass="user:password"
+workspace="/opt/workspace/"
+
 start() {
 	echo "Starting $nodeApp"
 
-	# Notice that we change the PATH because on reboot
+   # Notice that we change the PATH because on reboot
    # the PATH does not include the path to node.
    # Launching forever with a full path
    # does not work unless we set the PATH.
    PATH=/usr/local/bin:$PATH
 	export NODE_ENV=production
-   port=8080
-   pass="user:password"
-   workspace=/home/ec2-user/workspace/
    $foreverApp start --pidFile $pidFile -l $logFile -a -d -c "$command" $nodeApp -p $port -a $pass -w $workspace
    RETVAL=$?
 }

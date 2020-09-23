@@ -14,16 +14,15 @@ curl -L git.io/nodebrew | perl - setup
 echo "export PATH=$HOME/.nodebrew/current/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
 
-nodebrew install-binary latest
-nodebrew use latest
+nodebrew install-binary v13.13.0
+nodebrew use v13.13.0
+
+source ~/.bashrc
 
 #install nginx
 sudo yum -y install nginx
 
-chsh -s /bin/bash
-
 #pyenv install
-
 git clone git://github.com/yyuu/pyenv.git ~/.pyenv
 git clone git://github.com/yyuu/pyenv-update.git ~/.pyenv/plugins/pyenv-update
 
@@ -52,19 +51,25 @@ pyenv rehash
 pip install --upgrade pip
 pip install certbot-dns-cloudflare
 
-mkdir /home/ec2-user/workspace
-chmod 777 /home/ec2-user/workspace
-mkdir ~/.c9
-chmod 777 ~/.c9
+sudo mkdir /opt/workspace
+sudo chmod 755 /opt/workspace
+sudo chown -R ec2-user:ec2-user /opt/workspace
+
+sudo mkdir /opt/c9
+sudo chmod 755 /opt/c9
+sudo chown -R ec2-user:ec2-user /opt/c9
+sudo ln -s /opt/c9 ~/.c9
+
 cd /usr/local/src
-sudo chmod 777 /usr/local/src
+sudo chmod 755 /usr/local/src
+sudo chown -R ec2-user:ec2-user /usr/local/src
 
 git clone git://github.com/c9/core.git c9sdk
 cd c9sdk
 scripts/install-sdk.sh
 
-sudo npm install -g forever initd-forever
-sudo npm install -g log
+npm install -g forever initd-forever
+npm install -g log
 
 sudo cp ~/cloud9ide/cloud9ide /etc/init.d/
 sudo chkconfig cloud9ide --add
